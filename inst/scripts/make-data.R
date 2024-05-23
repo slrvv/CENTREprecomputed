@@ -94,8 +94,8 @@
 # and Control ChIP-seq for HeLa from ENCODE. 
 # We downloaded the experiments in BAM format and merged the replicates with 
 # bamtools merge. We separate the chromosomes using bamtools split and used the
-# files for chromosome 19. 
-#
+# files for chromosome 19.
+# 
 # For the RNA-seq data we use the gene quantifications in tsv format.  
 # The experiment accession numbers and URL's can be found on the metadata.csv 
 # file.

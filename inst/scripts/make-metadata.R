@@ -24,8 +24,7 @@ meta <- data.frame(
 	"Example input RNA-seq gene quantifications HeLa-S3 from ENCODE"),
 	BiocVersion = rep("3.19", 6),
 	Genome = rep("GRCh38", 6), 
-	SourceType = c(paste0("BED(CAGE), BED(DNAse-hypersensitive),",
-	              " BED(DNAse-seq-gene), BED and TSV (CRUP-EP-gene and crup cor)"),
+	SourceType = c(paste0("BED"),
 	              rep("BAM", 4), 
 	              "TSV"),
 	SourceUrl = c(paste0("https://fantom.gsc.riken.jp/5/datafiles/reprocessed/hg38_latest/extra/\n",
@@ -38,6 +37,9 @@ meta <- data.frame(
 	"https://www.encodeproject.org/experiments/ENCSR000AOC/",
 	"https://www.encodeproject.org/experiments/ENCSR000AOB/",
 	"https://www.encodeproject.org/experiments/ENCSR000CPP/"),
+	SourceVersion = c("NA", 
+	                rep("ENCODE4 v1.5.1 GRCh38", 4), 
+	                "ENCODE4 v1.2.3 GRCh38 V29"), 
 	Species = rep("Homo sapiens", 6),
 	TaxonomyId = rep(9606, 6),
 	Coordinate_1_based = rep(TRUE,6), 
@@ -60,4 +62,5 @@ write.csv(meta, file= system.file("extdata",
                                   "metadata.csv",
                                   package = "CENTREprecomputed"),
           row.names=FALSE)
+
  	
