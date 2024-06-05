@@ -16,3 +16,4 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 biocViews: ExperimentData, ExperimentHub, PackageTypeData
 Depends: ExperimentHub, utils, knitr, rmarkdown
+Import: ExperimentHub, ExperimentHubData, RSQLite
