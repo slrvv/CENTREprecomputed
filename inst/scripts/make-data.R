@@ -102,3 +102,36 @@
 # For the RNA-seq data we use the gene quantifications in tsv format.  
 # The experiment accession numbers and URL's can be found on the metadata.csv 
 # file.
+
+# For the metadata inside of the SQLite database
+metadata <- data.table::data.table(
+  name = c(
+    "DBSCHEMA",
+    "DBSCHEMAVERSION",
+    "SOURCENAME",
+    "SOURCEURL",
+    "SOURCEDATE",
+    "Db type",
+    "Supporting package",
+    "Supporting object"
+  ),
+  value = c(
+    NA,
+    NA,
+    "CENTREprecomputed",
+    "http://owww.molgen.mpg.de/~CENTRE_data/CENTREexperimentData/PrecomputedDataLight.db",
+    Sys.Date(),
+    "CENTREprecompDb",
+    "CENTREprecomputed",
+    "CENTREprecompDb"
+  )
+)
+
+
+
+conn <- RSQLite::dbConnect(RSQLite::SQLite(),
+                           "/home/web/CENTRE_data/CENTREexperimentData/PrecomputedDataLight.db")
+RSQLite::dbGetQuery(conn, "SELECT * from metadata")
+RSQLite::dbWriteTable(conn, "metadata", metadata, overwrite = T)
+
+RSQLite::dbDisconnect(conn)

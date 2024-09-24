@@ -8,17 +8,16 @@
 #'
 #' @description
 #'
-#' `CENTREprecompDb` objects provide access to general (metabolite) compound
-#' annotations along with *metadata* information such as the annotation's
-#' source, date and release version. The data is stored internally in a
-#' database (usually an SQLite database).
+#' The `CENTREprecompDb` object provides access to CENTRE's Precomputed SQLite 
+#' Database PrecomputedDataLight.db. Inside the database is combinedTestData, 
+#' crup_cor and metadata. For more information check \link[CENTRE]{computeGenericFeatures}
 #'
 #' @details
 #'
-#' `CENTREprecompDb` objects should be created using the constructor function
-#' `CENTREprecompDb()` providing the name of the (SQLite) database file providing
-#' the compound annotation data.
-NULL
+#' `CENTREprecompDb` is the object that provides access to CENTRE's database.
+#' `CENTREprecompDb@.properties$tables` shows the tables inside the database and
+#' their columns.
+
 setClassUnion("DBIConnectionOrNULL", c("DBIConnection", "NULL"))
 
 #' @importFrom methods new
@@ -53,8 +52,6 @@ CENTREprecompDb <- function(x, flags = SQLITE_RO) {
   if (missing(x))
     stop("Argument 'x' is required and should be either a connection to ",
          "the database or, for SQLite, the database file.")
-  if (is.character(x))
-    return(.initialize_compdb(.CENTREprecompDb(dbname = x, dbflags = flags)))
   if (is(x, "DBIConnection"))
     return(.initialize_compdb(.CENTREprecompDb(dbcon = x, dbflags = flags)))
   stop("'x' should be either a connection to a database or a character ",
@@ -115,7 +112,7 @@ CENTREprecompDb <- function(x, flags = SQLITE_RO) {
 
 #' @description Get a list of all tables and their columns.
 #'
-#' @param x `CompDb` object.
+#' @param x `CENTREprecompDb` object.
 #'
 #' @param name optional `character` to return the table/columns for specified
 #'     tables.
@@ -134,7 +131,7 @@ CENTREprecompDb <- function(x, flags = SQLITE_RO) {
 
 #' @export
 #'
-#' @rdname CompDb
+#' @rdname CENTREprecompDb
 tables <- function(x) {
   .tables(x)
 }

@@ -9,7 +9,6 @@ The PrecomputedDataLight.db contains the fisher combined p-value and the
 correlation between CRUP-PP and -EP scores for every enhancer-target (ET) pair
 at 500kb.
 
-To access the data use the SQLite connection CENTREprecomputed_dbconn().
 }
 \details{
 The combined p-value is computed from the p-values of four wilcoxon-rank sum tests
@@ -28,10 +27,6 @@ Verena Laupert, Igor Ulitsky, Martin Vingron, CENTRE: a gradient boosting
 algorithm for Cell-type-specific ENhancer-Target pREdiction, 
 Bioinformatics, Volume 39, Issue 11, November 2023, btad687, 
 \url{https://doi.org/10.1093/bioinformatics/btad687}}
-
-\seealso{
-  \code{\link[CENTREprecomputed:CENTREprecomputedDbconn]{CENTREprecomputedDbconn}}
-}
 
 
 \examples{

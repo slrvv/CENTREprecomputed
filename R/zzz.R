@@ -9,7 +9,6 @@
   ns <- asNamespace(pkgname)
   dataname <- "PrecomputedDataLight.db"
   dbfile <- system.file("extdata", dataname, package=pkgname, lib.loc=libname)
-  print(dbfile)
   db <- CENTREprecompDb(dbFileConnect(dbfile))
   objname <- "CENTREprecompDb"
   assign(objname,db, envir=ns)
