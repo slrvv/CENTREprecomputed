@@ -4,8 +4,15 @@
 # 
 ################################################################################
 
+
 .onLoad <- function(libname, pkgname) {
-  fl <- system.file("extdata", "metadata.csv", package=pkgname)
-  titles <- read.csv(fl, stringsAsFactors=FALSE)$Title
-  createHubAccessors(pkgname, titles)
+  ns <- asNamespace(pkgname)
+  dataname <- "PrecomputedDataLight.db"
+  dbfile <- system.file("extdata", dataname, package=pkgname, lib.loc=libname)
+  print(dbfile)
+  db <- CENTREprecompDb(dbFileConnect(dbfile))
+  objname <- "CENTREprecompDb"
+  assign(objname,db, envir=ns)
+  namespaceExport(ns, objname)
 }
+

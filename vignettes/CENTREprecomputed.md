@@ -1,5 +1,5 @@
 ---
-title: "CENTREannotation"
+title: "CENTREprecomputed""
 author: "Sara Lopez Ruiz de Vargas"
 date: "`r doc_date()`"
 vignette: >

@@ -88,8 +88,6 @@
 # 104 CTs. The CRUP-EP- CRUP-PP dataset can be found at: 
 # http://owww.molgen.mpg.de/~CENTRE_data/In_house_constructed_datasets.zip.
 #
-#
-
 
 # ENCODE HeLa Example data 
 # 
@@ -99,6 +97,8 @@
 # bamtools merge. We separate the chromosomes using bamtools split and used the
 # files for chromosome 19.
 # 
+# Bamtools index was used to index the BAM files.
+#
 # For the RNA-seq data we use the gene quantifications in tsv format.  
 # The experiment accession numbers and URL's can be found on the metadata.csv 
 # file.
