@@ -106,21 +106,19 @@
 # For the metadata inside of the SQLite database
 metadata <- data.table::data.table(
   name = c(
-    "DBSCHEMA",
-    "DBSCHEMAVERSION",
-    "SOURCENAME",
-    "SOURCEURL",
-    "SOURCEDATE",
+    "source_name",
+    "source_url",
+    "source_date",
+    "organism",
     "Db type",
-    "Supporting package",
-    "Supporting object"
+    "supporting_package",
+    "supporting_object"
   ),
   value = c(
-    NA,
-    NA,
     "CENTREprecomputed",
     "http://owww.molgen.mpg.de/~CENTRE_data/CENTREexperimentData/PrecomputedDataLight.db",
     Sys.Date(),
+    "HSapiens",
     "CENTREprecompDb",
     "CENTREprecomputed",
     "CENTREprecompDb"
@@ -131,7 +129,7 @@ metadata <- data.table::data.table(
 
 conn <- RSQLite::dbConnect(RSQLite::SQLite(),
                            "/home/web/CENTRE_data/CENTREexperimentData/PrecomputedDataLight.db")
-RSQLite::dbGetQuery(conn, "SELECT * from metadata")
-RSQLite::dbWriteTable(conn, "metadata", metadata, overwrite = T)
 
+RSQLite::dbWriteTable(conn, "metadata", metadata, overwrite = T)
+RSQLite::dbGetQuery(conn, "SELECT * from metadata")
 RSQLite::dbDisconnect(conn)

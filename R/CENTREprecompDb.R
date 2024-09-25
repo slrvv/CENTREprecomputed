@@ -24,14 +24,16 @@ setClassUnion("DBIConnectionOrNULL", c("DBIConnection", "NULL"))
 #'
 #' @exportClass CENTREprecompDb
 .CENTREprecompDb <- setClass("CENTREprecompDb",
-                    slots = c(dbcon = "DBIConnectionOrNULL",
+                    slots = c(conn = "DBIConnectionOrNULL",
                               .properties = "list",
                               dbname= "character",
-                              dbflags = "integer"),
+                              dbflags = "integer",
+                              packageName= "character"),
                     prototype = list(.properties = list(),
-                                     dbcon = NULL,
+                                     conn = NULL,
                                      dbname = character(),
-                                     dbflags = 1L))
+                                     dbflags = 1L,
+                                     packageName = character()))
 
 
 #' @importFrom methods validObject
@@ -48,20 +50,19 @@ setValidity("CENTREprecompDb", function(object) {
 #' @importFrom RSQLite SQLITE_RO
 #'
 #' @rdname CENTREprecompDb
-CENTREprecompDb <- function(x, flags = SQLITE_RO) {
-  if (missing(x))
-    stop("Argument 'x' is required and should be either a connection to ",
-         "the database or, for SQLite, the database file.")
-  if (is(x, "DBIConnection"))
-    return(.initialize_compdb(.CENTREprecompDb(dbcon = x, dbflags = flags)))
-  stop("'x' should be either a connection to a database or a character ",
-       "specifying the (SQLite) database file.")
+CENTREprecompDb <- function(x,
+                            flags = SQLITE_RO,
+                            packageName = "CENTREprecomputed") {
+  return(.initialize_compdb(.CENTREprecompDb(dbname = x,
+                                             dbflags = flags,
+                                             packageName = packageName)))
 }
 
 .initialize_compdb <- function(x) {
   con <- .dbconn(x)
+  x@conn <- con
   if (length(.dbname(x)) && !is.null(con))
-    on.exit(dbDisconnect(con))
+     on.exit(dbDisconnect(con))
   ## fetch all tables and all columns for all tables.
   tbl_nms <- dbListTables(con)
   tbls <- lapply(tbl_nms, function(z) {
@@ -77,7 +78,7 @@ CENTREprecompDb <- function(x, flags = SQLITE_RO) {
     n <- .dbname(x)
     x <- .dbconn(x)
     if (length(n) && !is.null(x))
-      on.exit(dbDisconnect(x))
+       on.exit(dbDisconnect(x))
   }
   dbGetQuery(x, "select * from metadata")
 }
@@ -89,18 +90,17 @@ CENTREprecompDb <- function(x, flags = SQLITE_RO) {
 
 
 .dbflags <- function(x) {
-  if (.hasSlot(x, "dbflags"))
+  if (.hasSlot(x, "dbflags")){
     x@dbflags
+  }
   else 1L
 }
 
 .dbconn <- function(x) {
   if (length(.dbname(x))){
-    print("Connecting")
     dbConnect(dbDriver("SQLite"), dbname = x@dbname, flags = .dbflags(x))
   }
-    
-  else x@dbcon
+  else x@conn
 }
 
 .dbname <- function(x) {

@@ -9,7 +9,7 @@
   ns <- asNamespace(pkgname)
   dataname <- "PrecomputedDataLight.db"
   dbfile <- system.file("extdata", dataname, package=pkgname, lib.loc=libname)
-  db <- CENTREprecompDb(dbFileConnect(dbfile))
+  db <- CENTREprecompDb(dbfile)
   objname <- "CENTREprecompDb"
   assign(objname,db, envir=ns)
   namespaceExport(ns, objname)
