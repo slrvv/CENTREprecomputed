@@ -1,3 +1,4 @@
 .RData
 .Rhistory
 /inst/extdata/PrecomputedDataLight.db
+vignettes/CENTREprecomputed.html

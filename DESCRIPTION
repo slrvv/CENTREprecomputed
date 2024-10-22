@@ -1,12 +1,12 @@
 Package: CENTREprecomputed
-Title: This is a Hub package for the precomputed data of CENTRE and example data
+Title:Hub package for the precomputed data of CENTRE and example data
 Version: 0.99.0
 Authors@R: 
     person("Sara", "Lopez Ruiz de Vargas",
     email = "lopez_s@molgen.mpg.de",
     role = c("aut", "cre"),
     comment = c(ORCID = "0000-0002-1290-4774"))
-Description: This is an AnnotationHub package for the CENTRE Bioconductor 
+Description: This is an Experiment Hub package for the CENTRE Bioconductor 
     software package. It contains the precomputed fisher combined p-values 
     and the ChIP-seq and RNA-seq data used for the example.
 Maintainer: Sara Lopez Ruiz de Vargas <lopez_s@molgen.mpg.de>
@@ -14,7 +14,8 @@ License: Artistic-2.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
-biocViews: ExperimentData, ExperimentHub, PackageTypeData
-Depends: ExperimentHub, utils, knitr, rmarkdown, methods, AnnotationDbi, DBI, RSQLite
-Import: ExperimentHub, ExperimentHubData, RSQLite, AnnotationDbi, DBI, utils
+biocViews: ExperimentData, ExperimentHub(>= 2.13), PackageTypeData
+Depends: DBI, R (>= 4.4.0), RSQLite, BiocGenerics, methods
+Import: ExperimentHub, RSQLite, qpdf, DBI, utils, BiocGenerics, methods
+Suggests: knitr, rmarkdown
 VignetteBuilder: knitr

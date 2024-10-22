@@ -1,7 +1,6 @@
 #' @name CENTREprecompDb
 #'
 #' @import BiocGenerics
-#'
 #' @title Database for the CENTRE precomputed data
 #'
 #' @aliases CENTREprecompDb-class show dbconn,CENTREprecompDb-method show,CENTREprecompDb-method
@@ -10,7 +9,8 @@
 #'
 #' The `CENTREprecompDb` object provides access to CENTRE's Precomputed SQLite 
 #' Database PrecomputedDataLight.db. Inside the database is combinedTestData, 
-#' crup_cor and metadata. For more information check \link[CENTRE]{computeGenericFeatures}
+#' crup_cor and metadata. For more information check the computeGenericFeatures()
+#' function from the CENTRE package
 #'
 #' @details
 #'
@@ -18,9 +18,10 @@
 #' `CENTREprecompDb@.properties$tables` shows the tables inside the database and
 #' their columns.
 
+
 setClassUnion("DBIConnectionOrNULL", c("DBIConnection", "NULL"))
 
-#' @importFrom methods new
+#' @importFrom methods new is
 #'
 #' @exportClass CENTREprecompDb
 .CENTREprecompDb <- setClass("CENTREprecompDb",
@@ -37,6 +38,7 @@ setClassUnion("DBIConnectionOrNULL", c("DBIConnection", "NULL"))
 
 
 #' @importFrom methods validObject
+#' @importFrom DBI dbDisconnect dbDriver dbGetQuery dbConnect dbListTables
 setValidity("CENTREprecompDb", function(object) {
   con <- .dbconn(object)
   if (!is.null(con)) {
@@ -45,19 +47,19 @@ setValidity("CENTREprecompDb", function(object) {
   } else TRUE
 })
 
-#' @export
-#'
+
+#' @param x sqlite file path
+#
 #' @importFrom RSQLite SQLITE_RO
 #'
 #' @rdname CENTREprecompDb
-CENTREprecompDb <- function(x,
-                            flags = SQLITE_RO,
-                            packageName = "CENTREprecomputed") {
+CENTREprecomputedDb <- function(x) {
   return(.initialize_compdb(.CENTREprecompDb(dbname = x,
-                                             dbflags = flags,
-                                             packageName = packageName)))
+                                             dbflags = SQLITE_RO,
+                                             packageName = "CENTREprecomputed")))
 }
 
+#' @importFrom DBI dbDriver dbGetQuery dbConnect dbListTables
 .initialize_compdb <- function(x) {
   con <- .dbconn(x)
   x@conn <- con
@@ -88,7 +90,7 @@ CENTREprecompDb <- function(x,
   metad[metad$name == key, "value"]
 }
 
-
+#' @importFrom methods .hasSlot
 .dbflags <- function(x) {
   if (.hasSlot(x, "dbflags")){
     x@dbflags

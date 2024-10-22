@@ -7,24 +7,25 @@
 \alias{show}
 \alias{dbconn,CENTREprecompDb-method}
 \alias{show,CENTREprecompDb-method}
+\alias{CENTREprecomputedDb}
 \alias{tables}
 \title{Database for the CENTRE precomputed data}
-\format{
-An object of class \code{CENTREprecompDb} of length 1.
-}
 \usage{
-CENTREprecompDb
+CENTREprecomputedDb(x)
 
 tables(x)
+}
+\arguments{
+\item{x}{sqlite file path}
 }
 \description{
 The \code{CENTREprecompDb} object provides access to CENTRE's Precomputed SQLite
 Database PrecomputedDataLight.db. Inside the database is combinedTestData,
-crup_cor and metadata. For more information check \link[CENTRE]{computeGenericFeatures}
+crup_cor and metadata. For more information check the computeGenericFeatures()
+function from the CENTRE package
 }
 \details{
 \code{CENTREprecompDb} is the object that provides access to CENTRE's database.
 \code{CENTREprecompDb@.properties$tables} shows the tables inside the database and
 their columns.
 }
-\keyword{datasets}
