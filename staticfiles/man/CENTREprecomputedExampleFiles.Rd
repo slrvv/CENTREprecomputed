@@ -11,10 +11,11 @@ provided in the package.
 \url{https://www.encodeproject.org/}
 }
 \examples{
-library(ExperimentHub)
+\dontrun{
 hub <- ExperimentHub()
 eh <- query(hub, "CENTREprecomputed")
 eh$sourceurl # provides the exact source for each experiment
 mcols(eh) #get more metadata
+}
 }
 \keyword{ExperimentHub}

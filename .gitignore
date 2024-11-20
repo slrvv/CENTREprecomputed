@@ -1,4 +1,6 @@
 .RData
 .Rhistory
-/inst/extdata/PrecomputedDataLight.db
-vignettes/CENTREprecomputed.html
+staticfiles/inst/extdata/PrecomputedDataLight.db
+staticfiles/vignettes/CENTREprecomputed.html
+CENTREprecomputed.Rcheck
+CENTREprecomputed_0.99.0.tar.gz

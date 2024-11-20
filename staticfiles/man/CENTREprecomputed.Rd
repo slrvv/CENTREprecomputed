@@ -31,7 +31,6 @@ Bioinformatics, Volume 39, Issue 11, November 2023, btad687,
 
 \examples{
 \dontrun{
-library("ExperimentHub")
 hub <- ExperimentHub()
 eh <- query(hub, "CENTREprecomputed")
 eh[["EH9540"]] ## PrecomputedData database
