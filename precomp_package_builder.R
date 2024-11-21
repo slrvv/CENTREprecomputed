@@ -52,7 +52,7 @@ file.copy(from = list.files("./staticfiles/inst/scripts", "+?\\.R$", full.names 
 file.copy(from = list.files("./staticfiles/doc", "*",full.names = TRUE),
           to = file.path(package_location, "inst/doc"))
 file.copy(from = list.files("./staticfiles/man", "+?\\.Rd$", full.names = TRUE),
-          to = file.path(package_location, "man"))
+          to = file.path(package_location, "man"), overwrite = T)
 
 
 # Copy the sqlite into the package
@@ -88,9 +88,9 @@ metadata <- data.table::data.table(
 precomp_conn <- create_db_connection(package_location)
 
 dbWriteTable(precomp_conn, "metadata", metadata, overwrite = T)
-dbGetQuery(conn, "SELECT * from metadata")
-dbDisconnect(conn)
+dbGetQuery(precomp_conn, "SELECT * from metadata")
+dbDisconnect(precomp_conn)
 
 system(paste0("R CMD check ", package_location))
-system(paste0("R CMD build --resave-data=best --no-build-vignettes", package_location))
+system(paste0("R CMD build --resave-data=best --no-build-vignettes ", package_location))
 

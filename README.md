@@ -13,7 +13,7 @@ git clone https://github.com/slrvv/CENTREprecomputed
 Install dependencies
 
 ```
-install.packages(c("data.table", "RSQLite"))
+install.packages(c("data.table", "RSQLite", "DBI"))
 ```
 
 Build package

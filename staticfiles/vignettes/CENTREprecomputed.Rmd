@@ -34,7 +34,7 @@ eh
 ```
 
 The records EH9541-EH9545 are the example and test data for the CENTRE package.
-Record EH9540 is the SQLite database which is accessed through `eh[[EH9540]]` and
+Record EH9540 is the SQLite database which is accessed through `eh[["EH9540"]]` and
 returns a CENTREprecompDb object or through `CENTREprecomputed::CENTREprecompDb`
 
 ## The CENTREprecompDb object
