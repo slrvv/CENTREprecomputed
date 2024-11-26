@@ -5,6 +5,7 @@ date: "`r doc_date()`"
 vignette: >
   %\VignetteIndexEntry{CENTRE ExperimentHub datasets}
   %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteDepends{CENTREprecomputed,RSQLite,BiocStyle,ExperimentHub}
 output: 
   BiocStyle::html_document
 link-citations: true
