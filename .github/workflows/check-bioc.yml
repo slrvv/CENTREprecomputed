@@ -42,9 +42,8 @@ env:
   run_docker: 'false'
 
 
-defaults:
-  run:
-    working-directory: CENTREprecomputed/staticfiles
+
+   
 
 jobs:
   build-check:
@@ -108,6 +107,7 @@ jobs:
           install.packages('remotes')
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
         shell: Rscript {0}
+        working-directory: staticfiles
 
       - name: Restore R package cache
         if: "!contains(github.event.head_commit.message, '/nocache') && runner.os != 'Linux'"
