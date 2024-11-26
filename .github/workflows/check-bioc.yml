@@ -25,6 +25,7 @@ on:
   pull_request:
 
 name: R-CMD-check-bioc
+working-directory: ./staticfiles
 
 ## These environment variables control whether to run GHA code later on that is
 ## specific to testthat, covr, and pkgdown.
@@ -74,14 +75,14 @@ jobs:
         run: |
           mkdir /__w/_temp/Library
           echo ".libPaths('/__w/_temp/Library')" > ~/.Rprofile
-        working-directory: ./staticfiles
+        
 
       ## Most of these steps are the same as the ones in
       ## https://github.com/r-lib/actions/blob/master/examples/check-standard.yaml
       ## If they update their steps, we will also need to update ours.
       - name: Checkout Repository
         uses: actions/checkout@v3
-        working-directory: ./staticfiles
+        
 
       ## R is already included in the Bioconductor docker images
       - name: Setup R from r-lib
@@ -90,20 +91,19 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
-        working-directory: ./staticfiles
+        
 
       ## pandoc is already included in the Bioconductor docker images
       - name: Setup pandoc from r-lib
         if: runner.os != 'Linux'
         uses: r-lib/actions/setup-pandoc@v2
-        working-directory: ./staticfiles
+        
 
       - name: Query dependencies
         run: |
           install.packages('remotes')
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
         shell: Rscript {0}
-        working-directory: ./staticfiles
 
       - name: Restore R package cache
         if: "!contains(github.event.head_commit.message, '/nocache') && runner.os != 'Linux'"
