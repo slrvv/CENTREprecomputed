@@ -45,10 +45,6 @@ env:
 
 
 jobs:
-  defaults:
-    run:
-      working-directory: ./staticfiles
-      
   build-check:
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
