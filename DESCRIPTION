@@ -11,7 +11,7 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 biocViews: ExperimentData, ExperimentHub(>= 2.13), PackageTypeData
-Depends: DBI, R (>= 4.4.0), RSQLite, BiocGenerics, methods
+Depends: DBI, R (>= 4.4.0), RSQLite, BiocGenerics, ExperimentHub, methods
 Import: ExperimentHub, RSQLite, qpdf, DBI, utils, BiocGenerics, methods
 Suggests: knitr, rmarkdown, BiocStyle
 VignetteBuilder: knitr
