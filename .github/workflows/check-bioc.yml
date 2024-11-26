@@ -42,6 +42,9 @@ env:
   run_docker: 'false'
 
 
+defaults:
+  run:
+    working-directory: ./staticfiles
 
 
 jobs:
