@@ -44,7 +44,7 @@ env:
 
 defaults:
   run:
-    working-directory: /staticfiles
+    working-directory: staticfiles/
 
 
 jobs:
