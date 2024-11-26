@@ -25,7 +25,6 @@ on:
   pull_request:
 
 name: R-CMD-check-bioc
-working-directory: ./staticfiles
 
 ## These environment variables control whether to run GHA code later on that is
 ## specific to testthat, covr, and pkgdown.
@@ -42,7 +41,14 @@ env:
   cache-version: 'cache-v1'
   run_docker: 'false'
 
+
+
+
 jobs:
+  defaults:
+    run:
+      working-directory: ./staticfiles
+      
   build-check:
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
