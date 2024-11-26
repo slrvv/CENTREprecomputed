@@ -44,8 +44,7 @@ env:
 
 defaults:
   run:
-    working-directory: staticfiles
-
+    working-directory: CENTREprecomputed/staticfiles
 
 jobs:
   build-check:
