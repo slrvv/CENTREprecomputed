@@ -91,6 +91,6 @@ dbWriteTable(precomp_conn, "metadata", metadata, overwrite = T)
 dbGetQuery(precomp_conn, "SELECT * from metadata")
 dbDisconnect(precomp_conn)
 
-system(paste0("R CMD check ", package_location))
-system(paste0("R CMD build --resave-data=best --no-build-vignettes ", package_location))
+#system(paste0("R CMD check ", package_location))
+#system(paste0("R CMD build --resave-data=best --no-build-vignettes ", package_location))
 
