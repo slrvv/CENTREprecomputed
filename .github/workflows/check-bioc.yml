@@ -216,6 +216,12 @@ jobs:
           pkgs <- installed.packages()[, "Package"]
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
+        
+      - name: Download and build db
+        run: |
+          Rscript precomp_package_builder.R
+        shell: Rscript {0}
+        
     
       - name: Run CMD check
         env:
@@ -224,7 +230,7 @@ jobs:
         run: |
           options(crayon.enabled = TRUE)
           rcmdcheck::rcmdcheck(
-              args = c("--no-manual", "--no-vignettes", "--timings"),
+              args = c("--no-build-vignettes", "--no-manual", "--timings"),
               build_args = c("--no-manual", "--keep-empty-dirs", "--no-resave-data"),
               error_on = "warning",
               check_dir = "check"
