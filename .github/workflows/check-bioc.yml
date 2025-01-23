@@ -217,9 +217,6 @@ jobs:
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
         
-      - name: Download and build db
-        command: Rscript precomp_package_builder.R
-        
       - name: Run CMD check
         env:
           _R_CHECK_CRAN_INCOMING_: false
