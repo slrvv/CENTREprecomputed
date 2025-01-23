@@ -219,7 +219,7 @@ jobs:
         
       - name: Download and build db
         run: |
-          Rscript precomp_package_builder.R
+           precomp_package_builder.R
         shell: Rscript {0}
         
     
