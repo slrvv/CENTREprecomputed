@@ -43,7 +43,7 @@ returns a CENTREprecompDb object or through `CENTREprecomputed::CENTREprecompDb`
 The R object to represent the precomputed database is `CENTREprecompDb`. 
 To get the slots for class run `CENTREprecompDb` 
 ```{r, results='hide'}
-CENTREprecomputed::CENTREprecompDb
+CENTREprecompDb
 ```
 
 There are three tables inside the database: 
@@ -56,8 +56,17 @@ For more information check `vignette("Centre-vignette")` or the
 
 The database can be used as follows: 
 ```{r}
-conn <- RSQLite::dbConnect(CENTREprecomputed::CENTREprecompDb@conn)
-RSQLite::dbGetQuery(conn, "SELECT * from metadata")
-RSQLite::dbDisconnect(conn) # don't forget to disconnect
+#get all tables and their columns, won't show metadata
+tables(CENTREprecompDb)
+
+#Select all cor_CRUP coefficients of enhancer EH38E3440167. Return the pair 
+#and ID column
+fetch_data(CENTREprecompDb, 
+           table="crup_cor", 
+           columns=c("pair", "cor_CRUP"),
+           filter="EH38E3440167", 
+           column_filter="symbol38")
+
+
 ```
 

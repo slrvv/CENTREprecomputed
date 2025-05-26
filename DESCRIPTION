@@ -1,11 +1,13 @@
 Package: CENTREprecomputed
 Title:Hub package for the precomputed data of CENTRE and example data
 Version: 0.99.0
-Author: Sara Ruiz de Vargas
+Authors@R: c(person(given = "Sara", family = "Lopez Ruiz de Vargas",
+    email = "lopez_s@molgen.mpg.de",
+	  role = c("aut", "cre"),
+		comment = c(ORCID = "0000-0002-1290-4774")))
 Description: This is an Experiment Hub package for the CENTRE Bioconductor 
     software package. It contains the precomputed fisher combined p-values 
     and the ChIP-seq and RNA-seq data used for the example.
-Maintainer: Sara Lopez Ruiz de Vargas <lopez_s@molgen.mpg.de>
 License: Artistic-2.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

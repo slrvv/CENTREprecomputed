@@ -5,8 +5,7 @@
 \alias{CENTREprecompDb}
 \alias{CENTREprecompDb-class}
 \alias{show}
-\alias{dbconn,CENTREprecompDb-method}
-\alias{show,CENTREprecompDb-method}
+\alias{dbconn}
 \alias{CENTREprecomputedDb}
 \alias{tables}
 \title{Database for the CENTRE precomputed data}
@@ -28,4 +27,7 @@ function from the CENTRE package
 \code{CENTREprecompDb} is the object that provides access to CENTRE's database.
 \code{CENTREprecompDb@.properties$tables} shows the tables inside the database and
 their columns.
+}
+\references{
+Based on \link[CompoundDb:CompDb]{CompoundDb::CompDb} class.
 }

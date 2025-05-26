@@ -1,9 +1,12 @@
+## Class definition and functions based on CoumpoundDb package.
+
+
 #' @name CENTREprecompDb
 #'
 #' @import BiocGenerics
 #' @title Database for the CENTRE precomputed data
 #'
-#' @aliases CENTREprecompDb-class show dbconn,CENTREprecompDb-method show,CENTREprecompDb-method
+#' @aliases CENTREprecompDb-class show dbconn
 #'
 #' @description
 #'
@@ -11,6 +14,8 @@
 #' Database PrecomputedDataLight.db. Inside the database is combinedTestData, 
 #' crup_cor and metadata. For more information check the computeGenericFeatures()
 #' function from the CENTRE package
+#' 
+#' @references Based on [CompoundDb::CompDb] class.
 #'
 #' @details
 #'
@@ -37,30 +42,19 @@ setClassUnion("DBIConnectionOrNULL", c("DBIConnection", "NULL"))
                                      packageName = character()))
 
 
-#' @importFrom methods validObject
-#' @importFrom DBI dbDisconnect dbDriver dbGetQuery dbConnect dbListTables
-setValidity("CENTREprecompDb", function(object) {
-  con <- .dbconn(object)
-  if (!is.null(con)) {
-    if (length(.dbname(object)))
-      on.exit(dbDisconnect(con))
-  } else TRUE
-})
-
-
 #' @param x sqlite file path
 #
 #' @importFrom RSQLite SQLITE_RO
 #'
 #' @rdname CENTREprecompDb
 CENTREprecomputedDb <- function(x) {
-  return(.initialize_compdb(.CENTREprecompDb(dbname = x,
+  return(.initialize_centreprecompdb(.CENTREprecompDb(dbname = x,
                                              dbflags = SQLITE_RO,
                                              packageName = "CENTREprecomputed")))
 }
 
-#' @importFrom DBI dbDriver dbGetQuery dbConnect dbListTables
-.initialize_compdb <- function(x) {
+#' @importFrom DBI dbDriver dbGetQuery dbConnect dbListTables dbDisconnect
+.initialize_centreprecompdb <- function(x) {
   con <- .dbconn(x)
   x@conn <- con
   if (length(.dbname(x)) && !is.null(con))
