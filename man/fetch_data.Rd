@@ -34,7 +34,7 @@ res <-  fetch_data(CENTREprecompDb,
      column_filter="symbol38")
 }
 \references{
-Based on \link{CompoundDb} query engine internal functions.
+Based on the package CompoundDb query engine internal functions.
 }
 \seealso{
 \code{vignette("CENTREprecomputed")}
