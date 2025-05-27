@@ -22,6 +22,9 @@ query is SELECT X FROM TABLE.}
 SELECT X FROM TABLE WHERE ID in Z. If filter or column_filter is missing the
 program assumes the query is SELECT X FROM TABLE.}
 }
+\value{
+data.frame with the data queried.
+}
 \description{
 Main interface to fetch data from the CENTREprecomputed package database
 through the \code{CENTREprecompDb} object.

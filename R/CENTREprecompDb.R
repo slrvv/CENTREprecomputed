@@ -20,8 +20,15 @@
 #' @details
 #'
 #' `CENTREprecompDb` is the object that provides access to CENTRE's database.
-#' `CENTREprecompDb@.properties$tables` shows the tables inside the database and
+#' `tables(CENTREprecompDb)` shows the tables inside the database and
 #' their columns.
+#' 
+#' @return Object of class `CENTREprecompDb`
+#' 
+#' @examples
+#' 
+#' tables(CENTREprecompDb)
+#' 
 
 
 setClassUnion("DBIConnectionOrNULL", c("DBIConnection", "NULL"))

@@ -17,6 +17,9 @@ tables(x)
 \arguments{
 \item{x}{sqlite file path}
 }
+\value{
+Object of class \code{CENTREprecompDb}
+}
 \description{
 The \code{CENTREprecompDb} object provides access to CENTRE's Precomputed SQLite
 Database PrecomputedDataLight.db. Inside the database is combinedTestData,
@@ -25,8 +28,13 @@ function from the CENTRE package
 }
 \details{
 \code{CENTREprecompDb} is the object that provides access to CENTRE's database.
-\code{CENTREprecompDb@.properties$tables} shows the tables inside the database and
+\code{tables(CENTREprecompDb)} shows the tables inside the database and
 their columns.
+}
+\examples{
+
+tables(CENTREprecompDb)
+
 }
 \references{
 Based on \link[CompoundDb:CompDb]{CompoundDb::CompDb} class.

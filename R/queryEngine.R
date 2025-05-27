@@ -80,6 +80,8 @@
 #' @references Based on the package CompoundDb query engine internal functions.
 #' 
 #' @seealso `vignette("CENTREprecomputed")`
+#' 
+#' @return data.frame with the data queried.
 #'
 #' @examples
 #' res <-  fetch_data(CENTREprecompDb, 
