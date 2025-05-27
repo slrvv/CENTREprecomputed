@@ -3,6 +3,7 @@
 library(RSQLite)
 library(DBI)
 
+options(timeout = max(1000, getOption("timeout")))
 
 download_url <- function(url, dir_name){
   download.file(url = url, destfile = (file.path(dir_name, basename(url))))
