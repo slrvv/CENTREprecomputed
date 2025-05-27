@@ -18,7 +18,7 @@
 #' + Fetch the data based on filter and column on which to filter.
 #'
 #' @md
-#' @references Based on [CompoundDb] query engine internal functions.
+#' @references Based on CompoundDb package query engine internal functions.
 #' @noRd
 .build_query <- function(x, table, columns, filter, column_filter) {
     if (missing(x))
@@ -77,7 +77,7 @@
 #' SELECT X FROM TABLE WHERE ID in Z. If filter or column_filter is missing the 
 #' program assumes the query is SELECT X FROM TABLE.
 #' 
-#' @references Based on [CompoundDb] query engine internal functions.
+#' @references Based on the package CompoundDb query engine internal functions.
 #' 
 #' @seealso `vignette("CENTREprecomputed")`
 #'
