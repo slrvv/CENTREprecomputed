@@ -218,8 +218,7 @@ jobs:
         shell: Rscript {0}
       
       - name: Download data
-        run: Rscript 'source("precomp_package_builder.R")'
-        shell: Rscript {0}
+        run: Rscript -e 'source("precomp_package_builder.R")'
         
       - name: Run CMD check
         env:
