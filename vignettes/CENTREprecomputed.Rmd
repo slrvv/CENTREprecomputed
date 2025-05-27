@@ -24,7 +24,7 @@ Visit `vignette("Centre-vignette")` for more information.
 
 All of the data in the CENTREprecomputed package can be accessed through ExperimentHub:
 
-```{r, results='hide'}
+```{r load hub, results='hide'}
 library(ExperimentHub, quietly = TRUE)
 ```
 
@@ -42,11 +42,13 @@ returns a CENTREprecompDb object or through `CENTREprecomputed::CENTREprecompDb`
 
 The R object to represent the precomputed database is `CENTREprecompDb`. 
 To get the slots for class run `CENTREprecompDb` 
-```{r, results='hide'}
+```{r CENTREprecompDb object}
+library(CENTREprecomputed)
 CENTREprecompDb
 ```
 
 There are three tables inside the database: 
+
 - `combinedTestData`: -log transformed p-values of the Wilcoxon rank sum tests.
 - `crup_cor`: correlations of CRUP-EP scores and CRUP-PP scores across cell-types.
 - `metadata`: metadata for the ExperimentHub
@@ -55,8 +57,8 @@ For more information check `vignette("Centre-vignette")` or the
 [CENTRE publication](https://academic.oup.com/bioinformatics/article/39/11/btad687/7429396?searchresult=1) 
 
 The database can be used as follows: 
-```{r}
-#get all tables and their columns, won't show metadata
+```{r how to fetch fata}
+#get all tables and their columns, won't show metadata table
 tables(CENTREprecompDb)
 
 #Select all cor_CRUP coefficients of enhancer EH38E3440167. Return the pair 

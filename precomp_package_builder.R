@@ -2,7 +2,7 @@
 
 library(RSQLite)
 library(DBI)
-library(data.table)
+
 
 download_url <- function(url, dir_name){
   download.file(url = url, destfile = (file.path(dir_name, basename(url))))
@@ -62,7 +62,7 @@ file.copy(from = file.path(tmp_dir, "PrecomputedDataLight.db"),
           overwrite = TRUE)
 
 
-metadata <- data.table::data.table(
+metadata <- data.frame(
   name = c(
     "source_name",
     "source_url",
@@ -91,6 +91,6 @@ dbWriteTable(precomp_conn, "metadata", metadata, overwrite = T)
 dbGetQuery(precomp_conn, "SELECT * from metadata")
 dbDisconnect(precomp_conn)
 
-#system(paste0("R CMD check ", package_location))
-#system(paste0("R CMD build --resave-data=best --no-build-vignettes ", package_location))
+system(paste0("R CMD check ", package_location))
+system(paste0("R CMD build --resave-data=best --no-build-vignettes ", package_location))
 
