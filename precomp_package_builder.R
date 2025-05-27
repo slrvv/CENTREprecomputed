@@ -26,6 +26,7 @@ download_url(mysqlite_dump_url, tmp_dir)
 ## Create package structure
 package_location = file.path(tmp_dir, "CENTREprecomputed")
 
+
 dir.create(file.path(package_location, "inst", "extdata"), recursive = TRUE)
 dir.create(file.path(package_location, "inst", "scripts"), recursive = TRUE)
 dir.create(file.path(package_location, "inst", "doc"), recursive = TRUE)
@@ -34,25 +35,23 @@ dir.create(file.path(package_location, "R"), recursive = TRUE)
 dir.create(file.path(package_location, "vignettes"), recursive = TRUE)
 dir.create(file.path(package_location, "doc"), recursive = TRUE)
 ## Copy static files
-file.copy(from = "./staticfiles/NAMESPACE", 
+file.copy(from = "./NAMESPACE", 
           to = file.path(package_location, "NAMESPACE"))
-file.copy(from = "./staticfiles/DESCRIPTION", 
+file.copy(from = "./DESCRIPTION", 
           to = file.path(package_location, "DESCRIPTION"), overwrite = T)
-file.copy(from = "./staticfiles/R/zzz.R", 
+file.copy(from = "./R/zzz.R", 
           to = file.path(package_location, "R/zzz.R"))
-file.copy(from = "./staticfiles/R/CENTREprecompDb.R", 
+file.copy(from = "./R/CENTREprecompDb.R", 
           to = file.path(package_location, "R/CENTREprecompDb.R"))
-file.copy(from = "./staticfiles/inst/extdata/metadata.csv", 
+file.copy(from = "./inst/extdata/metadata.csv", 
           to = file.path(package_location, "inst/extdata/metadata.csv"))
-file.copy(from = "./staticfiles/vignettes/CENTREprecomputed.Rmd", 
+file.copy(from = "./vignettes/CENTREprecomputed.Rmd", 
           to = file.path(package_location, "vignettes/CENTREprecomputed.Rmd"))
 
 
-file.copy(from = list.files("./staticfiles/inst/scripts", "+?\\.R$", full.names = TRUE),
-          to = file.path(package_location, "inst/scripts"))
-file.copy(from = list.files("./staticfiles/doc", "*",full.names = TRUE),
-          to = file.path(package_location, "inst/doc"))
-file.copy(from = list.files("./staticfiles/man", "+?\\.Rd$", full.names = TRUE),
+file.copy(from = list.files("inst/scripts", "+?\\.R$", full.names = TRUE),
+          to = file.path(package_location, "/inst/scripts"))
+file.copy(from = list.files("/man", "+?\\.Rd$", full.names = TRUE),
           to = file.path(package_location, "man"), overwrite = T)
 
 
@@ -87,11 +86,10 @@ metadata <- data.frame(
 
 
 precomp_conn <- create_db_connection(package_location)
-
 dbWriteTable(precomp_conn, "metadata", metadata, overwrite = T)
 dbGetQuery(precomp_conn, "SELECT * from metadata")
 dbDisconnect(precomp_conn)
 
-system(paste0("R CMD check ", package_location))
-system(paste0("R CMD build --resave-data=best --no-build-vignettes ", package_location))
+# system(paste0("R CMD build --resave-data=best --no-build-vignettes ", package_location))
+# system(paste0("R CMD check ", paste0(package_location, "/CENTREprecomputed_0.99.0.tar.gz")))
 

@@ -217,9 +217,11 @@ jobs:
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
       
-      - name: Download data
-        run: Rscript -e 'source("precomp_package_builder.R")'
-        
+      - name: Download required file
+        run: |
+          mkdir -p inst/extdata
+          curl -L "http://owww.molgen.mpg.de/~CENTRE_data/PrecomputedDataLight.db" -o inst/extdata/PrecomputedDataLight.db
+          
       - name: Run CMD check
         env:
           _R_CHECK_CRAN_INCOMING_: false
