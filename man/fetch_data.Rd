@@ -27,10 +27,11 @@ Main interface to fetch data from the CENTREprecomputed package database
 through the \code{CENTREprecompDb} object.
 }
 \examples{
-  res <- fetch_data(CENTREannotDb, 
-                    columns=c("enhancer_id", "start"), 
-                    filter=c("EH38E1519134","EH38E1519132") , 
-                    column_filter="enhancer_id")
+res <-  fetch_data(CENTREprecompDb, 
+    table="crup_cor", 
+    columns=c("pair", "cor_CRUP"),
+    filter="EH38E3440167", 
+     column_filter="symbol38")
 }
 \references{
 Based on \link{CompoundDb} query engine internal functions.
