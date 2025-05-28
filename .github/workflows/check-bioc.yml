@@ -219,7 +219,6 @@ jobs:
       
       - name: Download required file
         run: |
-          mkdir -p inst/extdata
           curl -L "http://owww.molgen.mpg.de/~CENTRE_data/PrecomputedDataLight.db" -o inst/extdata/PrecomputedDataLight.db
           
       - name: Run CMD check
