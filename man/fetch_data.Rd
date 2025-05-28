@@ -4,22 +4,22 @@
 \alias{fetch_data}
 \title{Fetch data from the CENTREprecompDb database}
 \usage{
-fetch_data(x, table, columns, filter, column_filter)
+fetch_data(x, table, columns, entries, column_filter)
 }
 \arguments{
 \item{x}{\code{CENTREprecompDb} object.}
 
-\item{table}{Table of the database on which to search. Can be combinedTestData
-or cor_CRUP}
+\item{table}{Table of the database on which to search.
+Can be combinedTestData or cor_CRUP.}
 
 \item{columns}{Columns to select. Equivalent to X in SELECT X.}
 
-\item{filter}{Element ID to select. Equivalen to ID in SELECT X FROM TABLE
-WHERE ID in Z. If filter or column_filter is missing the program assumes the
+\item{entries}{Element ID to select. Equivalen to ID in SELECT X FROM TABLE
+WHERE ID in Z. If entries or column_filter is missing the program assumes the
 query is SELECT X FROM TABLE.}
 
 \item{column_filter}{Column on which to apply filter. Equivalent to Z in
-SELECT X FROM TABLE WHERE ID in Z. If filter or column_filter is missing the
+SELECT X FROM TABLE WHERE ID in Z. If entries or column_filter is missing the
 program assumes the query is SELECT X FROM TABLE.}
 }
 \value{
@@ -30,11 +30,12 @@ Main interface to fetch data from the CENTREprecomputed package database
 through the \code{CENTREprecompDb} object.
 }
 \examples{
-res <-  fetch_data(CENTREprecompDb, 
-    table="crup_cor", 
-    columns=c("pair", "cor_CRUP"),
-    filter="EH38E3440167", 
-     column_filter="symbol38")
+res <- fetch_data(CENTREprecompDb,
+    table = "crup_cor",
+    columns = c("pair", "cor_CRUP"),
+    entries = "EH38E3440167",
+    column_filter = "symbol38"
+)
 }
 \references{
 Based on the package CompoundDb query engine internal functions.

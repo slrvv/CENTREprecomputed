@@ -11,18 +11,21 @@ output:
 link-citations: true
 ---
 
-# CENTREprecomputed: An ExperimentHub package with the precomputed data and example data for CENTRE
+# CENTREprecomputed: An ExperimentHub package with the precomputed data and 
+example data for CENTRE
 
 **CENTRE** is a package for Cell-type specific ENhancer Target pREdiction, that 
 follows this workflow: 
 
-`createPairs()` -> `computeGenericFeatures()` -> `computeCellTypeFeatures()` -> `centreClassification()`
+`createPairs()` -> `computeGenericFeatures()` -> `computeCellTypeFeatures()` -> 
+`centreClassification()`
 
 The step `CENTRE::computeGenericFeatures()` computes the genomic distance and 
-gets the precomputed features saved in the PrecomputedDataLight.db SQLite database.
-Visit `vignette("Centre-vignette")` for more information.
+gets the precomputed features saved in the PrecomputedDataLight.db 
+SQLite database. Visit `vignette("Centre-vignette")` for more information.
 
-All of the data in the CENTREprecomputed package can be accessed through ExperimentHub:
+All of the data in the CENTREprecomputed package can be accessed through 
+ExperimentHub:
 
 ```{r load hub, results='hide'}
 library(ExperimentHub, quietly = TRUE)
@@ -35,13 +38,13 @@ eh
 ```
 
 The records EH9541-EH9545 are the example and test data for the CENTRE package.
-Record EH9540 is the SQLite database which is accessed through `eh[["EH9540"]]` and
-returns a CENTREprecompDb object or through `CENTREprecomputed::CENTREprecompDb`
+Record EH9540 is the SQLite database which is accessed through `eh[["EH9540"]]` 
+and returns a CENTREprecompDb object or through `CENTREprecompDb`.
 
 ## The CENTREprecompDb object
 
 The R object to represent the precomputed database is `CENTREprecompDb`. 
-To get the slots for class run `CENTREprecompDb` 
+To get the slots for class run: 
 ```{r CENTREprecompDb object}
 library(CENTREprecomputed)
 CENTREprecompDb
@@ -50,7 +53,8 @@ CENTREprecompDb
 There are three tables inside the database: 
 
 - `combinedTestData`: -log transformed p-values of the Wilcoxon rank sum tests.
-- `crup_cor`: correlations of CRUP-EP scores and CRUP-PP scores across cell-types.
+- `crup_cor`: correlations of CRUP-EP scores and CRUP-PP scores across 
+cell-types.
 - `metadata`: metadata for the ExperimentHub
 
 For more information check `vignette("Centre-vignette")` or the 
@@ -58,17 +62,19 @@ For more information check `vignette("Centre-vignette")` or the
 
 The database can be used as follows: 
 ```{r how to fetch fata}
-#get all tables and their columns, won't show metadata table
+# get all tables and their columns, won't show metadata table
 tables(CENTREprecompDb)
 
-#Select all cor_CRUP coefficients of enhancer EH38E3440167. Return the pair 
-#and ID column
-fetch_data(CENTREprecompDb, 
-           table="crup_cor", 
-           columns=c("pair", "cor_CRUP"),
-           filter="EH38E3440167", 
-           column_filter="symbol38")
-
-
+# Select all cor_CRUP coefficients of enhancer EH38E3440167. Return the pair
+# and ID column
+fetch_data(CENTREprecompDb,
+    table = "crup_cor",
+    columns = c("pair", "cor_CRUP"),
+    entries = "EH38E3440167",
+    column_filter = "symbol38"
+)
 ```
 
+```{r sessionInfo}
+sessionInfo()
+```

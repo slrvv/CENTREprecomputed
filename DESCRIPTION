@@ -5,15 +5,18 @@ Authors@R: c(person(given = "Sara", family = "Lopez Ruiz de Vargas",
     email = "lopez_s@molgen.mpg.de",
 	  role = c("aut", "cre"),
 		comment = c(ORCID = "0000-0002-1290-4774")))
-Description: This is an Experiment Hub package for the CENTRE Bioconductor 
+Description: Experiment Hub package for the CENTRE Bioconductor 
     software package. It contains the precomputed fisher combined p-values, 
     CRUP correlations and the ChIP-seq and RNA-seq data used for the example.
 License: Artistic-2.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
-biocViews: ExperimentData, ExperimentHub, PackageTypeData
-Depends: DBI, R (>= 4.4.0), RSQLite, BiocGenerics, ExperimentHub, methods
-Import: ExperimentHub, RSQLite, qpdf, DBI, utils, BiocGenerics, methods
-Suggests: knitr, rmarkdown, BiocStyle
+biocViews: ExperimentData, PackageTypeData, ExperimentHub, RNASeqData, 
+    ChIPSeqData, ChipOnChipData
+Depends: R (>= 4.4.0)
+Import: ExperimentHub, RSQLite, DBI, utils, BiocGenerics
+Suggests:  knitr, rmarkdown, testthat, BiocStyle 
 VignetteBuilder: knitr
+URL: https://github.com/slrvv/CENTREprecomputed
+BugReports: https://github.com/slrvv/CENTREprecomputed/issues

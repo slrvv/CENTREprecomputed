@@ -10,11 +10,11 @@
 #'
 #' @description
 #'
-#' The `CENTREprecompDb` object provides access to CENTRE's Precomputed SQLite 
-#' Database PrecomputedDataLight.db. Inside the database is combinedTestData, 
-#' crup_cor and metadata. For more information check the computeGenericFeatures()
-#' function from the CENTRE package
-#' 
+#' The `CENTREprecompDb` object provides access to CENTRE's Precomputed SQLite
+#' Database PrecomputedDataLight.db. Inside the database is combinedTestData,
+#' crup_cor and metadata. For more information check the
+#' computeGenericFeatures() function from the CENTRE package
+#'
 #' @references Based on [CompoundDb::CompDb] class.
 #'
 #' @details
@@ -22,31 +22,34 @@
 #' `CENTREprecompDb` is the object that provides access to CENTRE's database.
 #' `tables(CENTREprecompDb)` shows the tables inside the database and
 #' their columns.
-#' 
+#'
 #' @return Object of class `CENTREprecompDb`
-#' 
+#'
 #' @examples
-#' 
+#'
 #' tables(CENTREprecompDb)
-#' 
-
-
+#'
 setClassUnion("DBIConnectionOrNULL", c("DBIConnection", "NULL"))
 
 #' @importFrom methods new is
 #'
 #' @exportClass CENTREprecompDb
 .CENTREprecompDb <- setClass("CENTREprecompDb",
-                    slots = c(conn = "DBIConnectionOrNULL",
-                              .properties = "list",
-                              dbname= "character",
-                              dbflags = "integer",
-                              packageName= "character"),
-                    prototype = list(.properties = list(),
-                                     conn = NULL,
-                                     dbname = character(),
-                                     dbflags = 1L,
-                                     packageName = character()))
+    slots = c(
+        conn = "DBIConnectionOrNULL",
+        .properties = "list",
+        dbname = "character",
+        dbflags = "integer",
+        packageName = "character"
+    ),
+    prototype = list(
+        .properties = list(),
+        conn = NULL,
+        dbname = character(),
+        dbflags = 1L,
+        packageName = character()
+    )
+)
 
 
 #' @param x sqlite file path
@@ -55,61 +58,69 @@ setClassUnion("DBIConnectionOrNULL", c("DBIConnection", "NULL"))
 #'
 #' @rdname CENTREprecompDb
 CENTREprecomputedDb <- function(x) {
-  return(.initialize_centreprecompdb(.CENTREprecompDb(dbname = x,
-                                             dbflags = SQLITE_RO,
-                                             packageName = "CENTREprecomputed")))
+    return(.initialize_centreprecompdb(.CENTREprecompDb(
+        dbname = x,
+        dbflags = SQLITE_RO,
+        packageName = "CENTREprecomputed"
+    )))
 }
 
 #' @importFrom DBI dbDriver dbGetQuery dbConnect dbListTables dbDisconnect
 .initialize_centreprecompdb <- function(x) {
-  con <- .dbconn(x)
-  x@conn <- con
-  if (length(.dbname(x)) && !is.null(con))
-     on.exit(dbDisconnect(con))
-  ## fetch all tables and all columns for all tables.
-  tbl_nms <- dbListTables(con)
-  tbls <- lapply(tbl_nms, function(z) {
-    colnames(dbGetQuery(con, paste0("select * from ", z, " limit 1")))
-  })
-  names(tbls) <- tbl_nms
-  x@.properties$tables <- tbls
-  x
+    con <- .dbconn(x)
+    x@conn <- con
+    if (length(.dbname(x)) && !is.null(con)) {
+        on.exit(dbDisconnect(con))
+    }
+    ## fetch all tables and all columns for all tables.
+    tbl_nms <- dbListTables(con)
+    tbls <- lapply(tbl_nms, function(z) {
+        colnames(dbGetQuery(con, paste0("select * from ", z, " limit 1")))
+    })
+    names(tbls) <- tbl_nms
+    x@.properties$tables <- tbls
+    x
 }
 
 .metadata <- function(x) {
-  if (!is(x, "DBIConnection")) {
-    n <- .dbname(x)
-    x <- .dbconn(x)
-    if (length(n) && !is.null(x))
-       on.exit(dbDisconnect(x))
-  }
-  dbGetQuery(x, "select * from metadata")
+    if (!is(x, "DBIConnection")) {
+        n <- .dbname(x)
+        x <- .dbconn(x)
+        if (length(n) && !is.null(x)) {
+            on.exit(dbDisconnect(x))
+        }
+    }
+    dbGetQuery(x, "select * from metadata")
 }
 
 .metadata_value <- function(x, key) {
-  metad <- .metadata(x)
-  metad[metad$name == key, "value"]
+    metad <- .metadata(x)
+    metad[metad$name == key, "value"]
 }
 
 #' @importFrom methods .hasSlot
 .dbflags <- function(x) {
-  if (.hasSlot(x, "dbflags")){
-    x@dbflags
-  }
-  else 1L
+    if (.hasSlot(x, "dbflags")) {
+        x@dbflags
+    } else {
+        1L
+    }
 }
 
 .dbconn <- function(x) {
-  if (length(.dbname(x))){
-    dbConnect(dbDriver("SQLite"), dbname = x@dbname, flags = .dbflags(x))
-  }
-  else x@conn
+    if (length(.dbname(x))) {
+        dbConnect(dbDriver("SQLite"), dbname = x@dbname, flags = .dbflags(x))
+    } else {
+        x@conn
+    }
 }
 
 .dbname <- function(x) {
-  if (.hasSlot(x, "dbname"))
-    x@dbname
-  else character()
+    if (.hasSlot(x, "dbname")) {
+        x@dbname
+    } else {
+        character()
+    }
 }
 
 
@@ -124,22 +135,23 @@ CENTREprecomputedDb <- function(x) {
 #'
 #' @noRd
 .tables <- function(x, name, metadata = FALSE) {
-  tbls <- .get_property(x, "tables")
-  if (!missing(name))
-    tbls <- tbls[name]
-  if (!metadata)
-    tbls <- tbls[names(tbls) != "metadata"]
-  tbls
+    tbls <- .get_property(x, "tables")
+    if (!missing(name)) {
+        tbls <- tbls[name]
+    }
+    if (!metadata) {
+        tbls <- tbls[names(tbls) != "metadata"]
+    }
+    tbls
 }
 
 #' @export
 #'
 #' @rdname CENTREprecompDb
 tables <- function(x) {
-  .tables(x)
+    .tables(x)
 }
 
 .get_property <- function(x, name) {
-  x@.properties[[name]]
+    x@.properties[[name]]
 }
-

@@ -11,7 +11,8 @@ PrecomputedDataLight.db with tables:
 \describe{
 \item{combinedTestData}{-log transformed p-values of the Wilcoxon rank sum
 tests for each ET pair.}
-\item{crup_cor}{correlation between CRUP-PP and -EP scores for each ET pair.}}
+\item{crup_cor}{correlation between CRUP-PP and -EP scores for each ET pair.}
+}
 }
 \source{
 \url{http://owww.molgen.mpg.de/~CENTRE_data/CENTREexperimentData/PrecomputedDataLight.db}
@@ -33,10 +34,11 @@ and the CRUP-EP-gene expression dataset.
 For more information check the CENTRE article in references
 }
 \examples{
-\donttest{ 
+\donttest{
 hub <- ExperimentHub()
 eh <- query(hub, "CENTREprecomputed")
-eh[["EH9540"]] ## PrecomputedData database }
+eh[["EH9540"]] ## PrecomputedData database
+}
 }
 \references{
 Trisevgeni Rapakoulia, Sara Lopez Ruiz De Vargas, Persia Akbari
@@ -44,6 +46,14 @@ Omgba, Verena Laupert, Igor Ulitsky, Martin Vingron, CENTRE: a gradient
 boosting  algorithm for Cell-type-specific ENhancer-Target pREdiction,
 Bioinformatics, Volume 39, Issue 11, November 2023, btad687,
 \url{https://doi.org/10.1093/bioinformatics/btad687}
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/slrvv/CENTREprecomputed}
+  \item Report bugs at \url{https://github.com/slrvv/CENTREprecomputed}
+}
+
 }
 \author{
 \strong{Maintainer}: Sara Lopez Ruiz de Vargas \email{lopez_s@molgen.mpg.de} (\href{https://orcid.org/0000-0002-1290-4774}{ORCID})
