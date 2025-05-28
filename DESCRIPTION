@@ -15,7 +15,7 @@ RoxygenNote: 7.3.1
 biocViews: ExperimentData, PackageTypeData, ExperimentHub, RNASeqData, 
     ChIPSeqData, ChipOnChipData
 Depends: R (>= 4.4.0)
-Import: ExperimentHub, RSQLite, DBI, utils, BiocGenerics
+Imports: ExperimentHub, RSQLite, DBI, BiocGenerics, methods
 Suggests:  knitr, rmarkdown, testthat, BiocStyle 
 VignetteBuilder: knitr
 URL: https://github.com/slrvv/CENTREprecomputed

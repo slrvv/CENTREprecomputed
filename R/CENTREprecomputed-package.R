@@ -33,6 +33,7 @@
 #' For more information check the CENTRE article in references
 #' @examples
 #' \donttest{
+#' library(ExperimentHub)
 #' hub <- ExperimentHub()
 #' eh <- query(hub, "CENTREprecomputed")
 #' eh[["EH9540"]] ## PrecomputedData database

@@ -35,6 +35,7 @@ For more information check the CENTRE article in references
 }
 \examples{
 \donttest{
+library(ExperimentHub)
 hub <- ExperimentHub()
 eh <- query(hub, "CENTREprecomputed")
 eh[["EH9540"]] ## PrecomputedData database
@@ -51,7 +52,7 @@ Bioinformatics, Volume 39, Issue 11, November 2023, btad687,
 Useful links:
 \itemize{
   \item \url{https://github.com/slrvv/CENTREprecomputed}
-  \item Report bugs at \url{https://github.com/slrvv/CENTREprecomputed}
+  \item Report bugs at \url{https://github.com/slrvv/CENTREprecomputed/issues}
 }
 
 }

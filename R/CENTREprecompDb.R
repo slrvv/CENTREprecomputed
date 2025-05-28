@@ -29,6 +29,8 @@
 #'
 #' tables(CENTREprecompDb)
 #'
+
+#'@importClassesFrom DBI DBIConnection
 setClassUnion("DBIConnectionOrNULL", c("DBIConnection", "NULL"))
 
 #' @importFrom methods new is
