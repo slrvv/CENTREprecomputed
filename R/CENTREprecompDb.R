@@ -53,7 +53,6 @@ setClassUnion("DBIConnectionOrNULL", c("DBIConnection", "NULL"))
     )
 )
 
-
 #' @param x sqlite file path
 #
 #' @importFrom RSQLite SQLITE_RO

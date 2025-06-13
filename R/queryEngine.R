@@ -21,17 +21,7 @@
 #' @references Based on CompoundDb package query engine internal functions.
 #' @noRd
 .build_query <- function(x, table, columns, entries, column_filter) {
-    if (missing(x)) {
-        stop(" 'x' is required")
-    }
-    if (missing(columns)) {
-        stop("'columns' is required")
-    }
-    if (missing(table)) {
-        stop("'table' is required")
-    }
-
-    ## check columns exist in db
+    # check columns exist in db
     tbls <- .tables(x)
     col_m <- columns[!columns %in% unique(unlist(tbls, use.names = FALSE))]
     msg <- paste(col_m, collapse = ", ")
@@ -41,8 +31,10 @@
             " are not present in the database. Use 'tables' to list ",
             "all tables and their columns."
         )
+
     }
 
+    #check tables exist
     table_m <- table[!table %in% names(tbls)]
     if (length(table_m != 0)) {
         stop(
@@ -52,7 +44,6 @@
         )
     }
 
-    ## check table exists in db
 
     paste0(
         paste0("select ", paste0(columns, collapse = ",")),
@@ -115,15 +106,28 @@
 #' )
 #' @export
 fetch_data <- function(x, table, columns, entries, column_filter) {
+    
+    if (missing(x)) {
+        stop(" 'x' is required")
+    }
+    if (missing(columns)) {
+        stop("'columns' is required")
+    }
+    if (missing(table)) {
+        stop("'table' is required")
+    }
+    
     con <- .dbconn(x)
     if (length(.dbname(x))) {
         on.exit(dbDisconnect(con))
     }
-    data <- dbGetQuery(con, .build_query(x,
-        table = table,
-        columns = columns,
-        entries = entries,
-        column_filter = column_filter
-    ))
+    
+    query <- .build_query(x,
+                          table = table,
+                          columns = columns,
+                          entries = entries,
+                          column_filter = column_filter
+    )
+    data <- dbGetQuery(con, query)
     return(data)
 }
