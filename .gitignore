@@ -1,3 +1,4 @@
+.github/workflows/
 .RData
 .Rhistory
 inst/extdata/PrecomputedDataLight.db
