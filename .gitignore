@@ -1,3 +1,5 @@
+.github/
+.github/.gitignore
 .github/workflows/
 .RData
 .Rhistory
