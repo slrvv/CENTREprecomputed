@@ -6,11 +6,10 @@
 \alias{CENTREprecompDb-class}
 \alias{show}
 \alias{dbconn}
-\alias{CENTREprecomputedDb}
 \alias{tables}
 \title{Database for the CENTRE precomputed data}
 \usage{
-CENTREprecomputedDb(x)
+CENTREprecompDb(x)
 
 tables(x)
 }
@@ -24,7 +23,7 @@ Object of class \code{CENTREprecompDb}
 The \code{CENTREprecompDb} object provides access to CENTRE's Precomputed SQLite
 Database PrecomputedDataLight.db. Inside the database is combinedTestData,
 crup_cor and metadata. For more information check the
-computeGenericFeatures() function from the CENTRE package
+computeGenericFeatures() function from the CENTRE package.
 }
 \details{
 \code{CENTREprecompDb} is the object that provides access to CENTRE's database.
@@ -32,10 +31,12 @@ computeGenericFeatures() function from the CENTRE package
 their columns.
 }
 \examples{
-
-tables(CENTREprecompDb)
+#The object is accessed through the ExperimentHub record
+eh <- ExperimentHub::ExperimentHub()
+centreprecompdb <- eh[["EH9540"]]
+tables(centreprecompdb)
 
 }
 \references{
-Based on \link[CompoundDb:CompDb]{CompoundDb::CompDb} class.
+Based on CompoundDb::CompDb class.
 }

@@ -11,8 +11,8 @@ output:
 link-citations: true
 ---
 
-# CENTREprecomputed: An ExperimentHub package with the precomputed data and 
-example data for CENTRE
+# CENTREprecomputed: An Experiment Data package interface with the precomputed 
+data and example data for CENTRE
 
 **CENTRE** is a package for Cell-type specific ENhancer Target pREdiction, that 
 follows this workflow: 
@@ -39,7 +39,7 @@ eh
 
 The records EH9541-EH9545 are the example and test data for the CENTRE package.
 Record EH9540 is the SQLite database which is accessed through `eh[["EH9540"]]` 
-and returns a CENTREprecompDb object or through `CENTREprecompDb`.
+and returns a CENTREprecompDb object.
 
 ## The CENTREprecompDb object
 
@@ -47,7 +47,7 @@ The R object to represent the precomputed database is `CENTREprecompDb`.
 To get the slots for class run: 
 ```{r CENTREprecompDb object}
 library(CENTREprecomputed)
-CENTREprecompDb
+centreprecompdb <- eh[["EH9540"]]
 ```
 
 There are three tables inside the database: 
@@ -61,13 +61,12 @@ For more information check `vignette("Centre-vignette")` or the
 [CENTRE publication](https://academic.oup.com/bioinformatics/article/39/11/btad687/7429396?searchresult=1) 
 
 The database can be used as follows: 
-```{r how to fetch fata}
+```{r how to fetch data}
 # get all tables and their columns, won't show metadata table
-tables(CENTREprecompDb)
-
+tables(centreprecompdb)
 # Select all cor_CRUP coefficients of enhancer EH38E3440167. Return the pair
 # and ID column
-fetch_data(CENTREprecompDb,
+fetch_data(centreprecompdb,
     table = "crup_cor",
     columns = c("pair", "cor_CRUP"),
     entries = "EH38E3440167",

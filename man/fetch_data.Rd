@@ -26,11 +26,14 @@ program assumes the query is SELECT X FROM TABLE.}
 data.frame with the data queried.
 }
 \description{
-Main interface to fetch data from the CENTREprecomputed package database
+Function to fetch data from the CENTREprecomputed package database
 through the \code{CENTREprecompDb} object.
 }
 \examples{
-res <- fetch_data(CENTREprecompDb,
+eh <- ExperimentHub::ExperimentHub()
+centreprecompdb <- eh[["EH9540"]]
+
+res <- fetch_data(centreprecompdb,
     table = "crup_cor",
     columns = c("pair", "cor_CRUP"),
     entries = "EH38E3440167",

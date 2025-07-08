@@ -4,10 +4,10 @@
 \name{CENTREprecomputed-package}
 \alias{CENTREprecomputed}
 \alias{CENTREprecomputed-package}
-\title{CENTREprecomputed: Hub package for the precomputed data of CENTRE
-and example data}
+\title{CENTREprecomputed: Experiment Data package interface for the
+precomputed data of CENTRE and example data}
 \format{
-PrecomputedDataLight.db with tables:
+Database with tables:
 \describe{
 \item{combinedTestData}{-log transformed p-values of the Wilcoxon rank sum
 tests for each ET pair.}
@@ -18,8 +18,9 @@ tests for each ET pair.}
 \url{http://owww.molgen.mpg.de/~CENTRE_data/CENTREexperimentData/PrecomputedDataLight.db}
 }
 \description{
-This is an Experiment Hub package for the CENTRE Bioconductor software
-package. It contains the precomputed fisher combined p-values,
+This is an Experiment Data package for the CENTRE Bioconductor software
+package. It serves as an interface for the CENTRE PrecomputedData database
+which contains the precomputed fisher combined p-values,
 CRUP correlations and the ChIP-seq and RNA-seq data used for the example.
 The PrecomputedDataLight.db contains the fisher combined p-value and the
 correlation between CRUP-PP and -EP scores for every enhancer-target (ET)
