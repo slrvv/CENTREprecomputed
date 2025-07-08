@@ -216,10 +216,6 @@ jobs:
           pkgs <- installed.packages()[, "Package"]
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
-      
-      - name: Download required file
-        run: |
-          curl -L "http://owww.molgen.mpg.de/~CENTRE_data/PrecomputedDataLight.db" -o inst/extdata/PrecomputedDataLight.db
           
       - name: Run CMD check
         env:
