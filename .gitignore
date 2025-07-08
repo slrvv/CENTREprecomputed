@@ -1,5 +1,9 @@
+.github/
+.github/.gitignore
+.github/workflows/
 .RData
 .Rhistory
+.Rbuildignore
 inst/extdata/PrecomputedDataLight.db
 vignettes/CENTREprecomputed.html
 CENTREprecomputed.Rcheck

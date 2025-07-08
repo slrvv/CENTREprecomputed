@@ -77,7 +77,7 @@
 #' @title Fetch data from the CENTREprecompDb database
 #'
 #' @description
-#' Main interface to fetch data from the CENTREprecomputed package database
+#' Function to fetch data from the CENTREprecomputed package database
 #' through the `CENTREprecompDb` object.
 #'
 #' @param x `CENTREprecompDb` object.
@@ -98,7 +98,10 @@
 #' @return data.frame with the data queried.
 #'
 #' @examples
-#' res <- fetch_data(CENTREprecompDb,
+#' eh <- ExperimentHub::ExperimentHub()
+#' centreprecompdb <- eh[["EH9540"]]
+#'
+#' res <- fetch_data(centreprecompdb,
 #'     table = "crup_cor",
 #'     columns = c("pair", "cor_CRUP"),
 #'     entries = "EH38E3440167",
@@ -106,7 +109,6 @@
 #' )
 #' @export
 fetch_data <- function(x, table, columns, entries, column_filter) {
-    
     if (missing(x)) {
         stop(" 'x' is required")
     }
@@ -117,11 +119,12 @@ fetch_data <- function(x, table, columns, entries, column_filter) {
         stop("'table' is required")
     }
     
-    con <- .dbconn(x)
-    if (length(.dbname(x))) {
+    #fill the CENTREprecompdb slots
+    x <- CENTREprecompDb(x@conn)
+    con <- .dbconn(x) #connect to database to retrieve records
+    if (length(.dbname(x)) && !is.null(con)) {
         on.exit(dbDisconnect(con))
     }
-    
     query <- .build_query(x,
                           table = table,
                           columns = columns,
@@ -131,3 +134,5 @@ fetch_data <- function(x, table, columns, entries, column_filter) {
     data <- dbGetQuery(con, query)
     return(data)
 }
+
+

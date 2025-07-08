@@ -4,6 +4,7 @@
 #' @name CENTREprecompDb
 #'
 #' @import BiocGenerics
+#' @importFrom ExperimentHub ExperimentHub
 #' @title Database for the CENTRE precomputed data
 #'
 #' @aliases CENTREprecompDb-class show dbconn
@@ -13,9 +14,9 @@
 #' The `CENTREprecompDb` object provides access to CENTRE's Precomputed SQLite
 #' Database PrecomputedDataLight.db. Inside the database is combinedTestData,
 #' crup_cor and metadata. For more information check the
-#' computeGenericFeatures() function from the CENTRE package
+#' computeGenericFeatures() function from the CENTRE package.
 #'
-#' @references Based on [CompoundDb::CompDb] class.
+#' @references Based on CompoundDb::CompDb class.
 #'
 #' @details
 #'
@@ -26,8 +27,10 @@
 #' @return Object of class `CENTREprecompDb`
 #'
 #' @examples
-#'
-#' tables(CENTREprecompDb)
+#' #The object is accessed through the ExperimentHub record
+#' eh <- ExperimentHub::ExperimentHub()
+#' centreprecompdb <- eh[["EH9540"]]
+#' tables(centreprecompdb)
 #'
 
 #'@importClassesFrom DBI DBIConnection
@@ -53,14 +56,37 @@ setClassUnion("DBIConnectionOrNULL", c("DBIConnection", "NULL"))
     )
 )
 
+#' @importFrom methods validObject
+setValidity("CENTREprecompDb", function(object) {
+    con <- .dbconn(object)
+    if (!is.null(con)) {
+        .validCompDb(con)
+    } else TRUE
+})
+
+#' @importFrom DBI dbListTables dbIsValid
+.validCompDb <- function(x) {
+    if (!dbIsValid(x))
+        return("Database connection not available or closed.")
+    tables <- dbListTables(x)
+    required_tables <- c("combinedTestData", "crup_cor")
+    got <- required_tables %in% tables
+    if (!all(got)){
+        return(paste0("Required tables ",
+                      paste0("'", required_tables[!got], "'", collapse = ", "),
+                      " not found in the database"))
+    }
+    TRUE
+}
+
 #' @param x sqlite file path
 #
 #' @importFrom RSQLite SQLITE_RO
 #'
 #' @rdname CENTREprecompDb
-CENTREprecomputedDb <- function(x) {
+CENTREprecompDb <- function(x) {
     return(.initialize_centreprecompdb(.CENTREprecompDb(
-        dbname = x,
+        conn = x,
         dbflags = SQLITE_RO,
         packageName = "CENTREprecomputed"
     )))
@@ -69,7 +95,7 @@ CENTREprecomputedDb <- function(x) {
 #' @importFrom DBI dbDriver dbGetQuery dbConnect dbListTables dbDisconnect
 .initialize_centreprecompdb <- function(x) {
     con <- .dbconn(x)
-    x@conn <- con
+    x@dbname <- dbfile(con)
     if (length(.dbname(x)) && !is.null(con)) {
         on.exit(dbDisconnect(con))
     }
@@ -109,8 +135,8 @@ CENTREprecomputedDb <- function(x) {
 }
 
 .dbconn <- function(x) {
-    if (length(.dbname(x))) {
-        dbConnect(dbDriver("SQLite"), dbname = x@dbname, flags = .dbflags(x))
+    if  (!dbIsValid(x@conn)) {
+        dbConnect(dbDriver("SQLite"), dbname = dbfile(x@conn), flags = .dbflags(x))
     } else {
         x@conn
     }
@@ -150,6 +176,8 @@ CENTREprecomputedDb <- function(x) {
 #'
 #' @rdname CENTREprecompDb
 tables <- function(x) {
+    con <- .dbconn(x)
+    x <- CENTREprecompDb(con)
     .tables(x)
 }
 
