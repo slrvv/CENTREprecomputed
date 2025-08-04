@@ -1,6 +1,6 @@
 Package: CENTREprecomputed
 Title: Hub package for the precomputed data of CENTRE and example data
-Version: 0.99.0
+Version: 0.99.2
 Authors@R: c(person(given = "Sara", family = "Lopez Ruiz de Vargas",
     email = "lopez_s@molgen.mpg.de",
 	  role = c("aut", "cre"),
