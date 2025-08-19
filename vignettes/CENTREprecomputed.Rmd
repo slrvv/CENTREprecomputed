@@ -66,7 +66,7 @@ The database can be used as follows:
 tables(centreprecompdb)
 # Select all cor_CRUP coefficients of enhancer EH38E3440167. Return the pair
 # and ID column
-fetch_data(centreprecompdb,
+fetch_data_precomp(centreprecompdb,
     table = "crup_cor",
     columns = c("pair", "cor_CRUP"),
     entries = "EH38E3440167",
