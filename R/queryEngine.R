@@ -72,7 +72,7 @@
     }
 }
 
-#' @name fetch_data
+#' @name fetch_data_precomp
 #'
 #' @title Fetch data from the CENTREprecompDb database
 #'
@@ -101,14 +101,14 @@
 #' eh <- ExperimentHub::ExperimentHub()
 #' centreprecompdb <- eh[["EH9540"]]
 #'
-#' res <- fetch_data(centreprecompdb,
+#' res <- fetch_data_precomp(centreprecompdb,
 #'     table = "crup_cor",
 #'     columns = c("pair", "cor_CRUP"),
 #'     entries = "EH38E3440167",
 #'     column_filter = "symbol38"
 #' )
 #' @export
-fetch_data <- function(x, table, columns, entries, column_filter) {
+fetch_data_precomp <- function(x, table, columns, entries, column_filter) {
     if (missing(x)) {
         stop(" 'x' is required")
     }
